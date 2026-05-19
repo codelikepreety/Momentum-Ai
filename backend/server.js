@@ -2,7 +2,9 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import { connectDB } from "./config/db.js";
-import authRoutes from "./routes/auth.js"
+import authRoutes from "./routes/auth.js";
+import habitRoutes from "./routes/habits.js";
+import logRoutes from "./routes/logs.js"
 import { notFound, errorHandler } from "./middleware/errorHandler.js"
 
 const app= express ()
@@ -44,6 +46,8 @@ res.json({status: "ok", time: new Date().toISOString() })
 )
 
 app.use("/api/auth", authRoutes)
+app.use("/api/habits",habitRoutes)
+app.use("/api/logs", logRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
