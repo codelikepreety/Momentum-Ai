@@ -3,7 +3,7 @@ import {
   weeklyReport,
   suggestHabits,
   recoveryPlan,
-  chatAalysis,
+  chatAnalysis,
   morningMotivation,
 } from "../controllers/aiController.js";
 import { protect } from "../middleware/auth.js";
@@ -15,7 +15,7 @@ router.use(protect);
 router.post("/weekly-report",weeklyReport);
 router.post("/suggest-habits", suggestHabits);
 router.post("/recovery-plan", recoveryPlan);
-router.post("/chat",chatAalysis);
+router.post("/chat",chatAnalysis);
 router.get("/morning", morningMotivation);
 
 export default router;

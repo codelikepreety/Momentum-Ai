@@ -1,4 +1,4 @@
-import { GoogleGenAi } from "@google/genai";
+import { GoogleGenAI } from "@google/genai";
 
 let client = null;
 const getClient = () => {
