@@ -1,4 +1,4 @@
-import { format , subDays, startOfWeek, endOfWeek, eachDayOfInterval } from "date-fns";
+import { format, subDays, startOfWeek, endOfWeek, eachDayOfInterval } from "date-fns";
 
 export const toDateKey = (date) => format(date, "yyyy-MM-dd");
 
@@ -7,7 +7,7 @@ export const todayKey = () => toDateKey(new Date());
 export const last90Days = () => {
   const end = new Date();
   const start = subDays(end, 89);
-  return eachDayOfInterval({start, end }).map(toDateKey);
+  return eachDayOfInterval({ start, end }).map(toDateKey);
 }
 
 export const currentWeekKeys = () => {
@@ -17,17 +17,17 @@ export const currentWeekKeys = () => {
   return eachDayOfInterval({ start, end }).map(toDateKey)
 };
 
-export  const lastNDays = (n) => {
+export const lastNDays = (n) => {
   const end = new Date();
-  const start = subDays(end, n-1);
+  const start = subDays(end, n - 1);
   return eachDayOfInterval({ start, end }).map(toDateKey)
 }
 
 export const calcStreak = (sortedDateKeys) => {
   //sortedDateKeys newest first, unique
-  if (!sortedDateKeys.length) return {current: 0, longest: 0 };
+  if (!sortedDateKeys.length) return { current: 0, longest: 0 };
   const set = new Set(sortedDateKeys)
-  const today = toDateKey()
+  const today = todayKey()
   const yesterday = toDateKey(subDays(new Date(), 1))
 
   let current = 0;
@@ -50,8 +50,8 @@ export const calcStreak = (sortedDateKeys) => {
     if (prev) {
       const d = new Date(k);
       const p = new Date(prev);
-      const diff = Math.round((d - p) / (1000*60*60*24));
-      if (diff === 1) run +=1;
+      const diff = Math.round((d - p) / (1000 * 60 * 60 * 24));
+      if (diff === 1) run += 1;
       else run = 1;
     } else {
       run = 1;

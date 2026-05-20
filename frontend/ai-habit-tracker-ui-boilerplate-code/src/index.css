@@ -120,6 +120,11 @@ html.dark {
   -moz-osx-font-smoothing: grayscale;
 }
 
+html.dark select option {
+  background: var(--bg-base);
+  color: var(--text);
+}
+
 html,
 body,
 #root {

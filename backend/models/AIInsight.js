@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 const aiInsightSchema = new mongoose.Schema(
   {
@@ -14,7 +14,7 @@ const aiInsightSchema = new mongoose.Schema(
       required: true,
     },
     content: { type: String, required: true },
-    metal: { type: mongoose.Schema.Types.Mixed, default: {} },
+    meta: { type: mongoose.Schema.Types.Mixed, default: {} },
     generatedAt: { type: Date, default: Date.now },
   },
   { timestamps: true }

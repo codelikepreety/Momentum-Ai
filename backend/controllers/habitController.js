@@ -6,10 +6,10 @@ export const getHabits = async (req, res) => {
     const { includeArchived } = req.query;
     const filter = { userId: req.user._id };
     if (includeArchived !== "true") filter.isArchived = false;
-    const habits = (await Habit.find(filter)).sort({ order: 1, createdAt: 1 })
-    res.json(habits)
+    const habits = await Habit.find(filter).sort({ order: 1, createdAt: 1 });
+    res.json(habits);
   } catch (err) {
-    res.status(500).json({message: err.message })
+    res.status(500).json({message: err.message });
   }
 };
 

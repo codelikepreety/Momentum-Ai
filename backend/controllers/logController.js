@@ -9,10 +9,10 @@ import {
 
 export const markComplete = async (req, res) => {
   try {
-    const { habtId, date } = req.body;
+    const { habitId, date } = req.body;
     const completedDate = date || todayKey();
-    const hbait = await Habit.findOne({
-      _id: habtId,
+    const habit = await Habit.findOne({
+      _id: habitId,
       userId: req.user._id,
     });
     if (!habit) return res.status(404).json({ message: "Habit not found" });
@@ -79,6 +79,7 @@ export const getHeatmap = async (req, res) =>{
     const counts = {};
     for (const d of days) counts[d] = 0;
     for (const l of logs) counts[l.completedDate] = (counts[l.completedDate] || 0) + 1;
+    const data = days.map((d) => ({ date: d, count: counts[d] }));
     res.json(data);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -105,9 +106,9 @@ export const getHabitStats = async (req, res) => {
     const createdKey = habit.createdAt.toISOString().slice(0,10);
     const today = todayKey();
     const start = new Date(createdKey);
-    const end= new Date(today);
-    const totalDays = Math.msx(1, Math.round((end - start) / (1000*60*60*24))) + 1;
-    const completedRate= Math.round((loas.length / totalDays) * 100);
+    const end = new Date(today);
+    const totalDays = Math.max(1, Math.round((end - start) / (1000*60*60*24))) + 1;
+    const completionRate = Math.round((logs.length / totalDays) * 100);
 
     //monthly breakdown (last 6 months)
     const monthly = {};
@@ -140,7 +141,7 @@ export const getAllStats = async( req, res) => {
       completedDate: {$gte: days[0], $lte: days[days.length - 1] },
     })
 
-    const perHabit = habit.map((h)=> {
+    const perHabit = habits.map((h)=> {
       const hLogs = logs.filter((l) => String(l.habitId) === String(h._id));
       const keys = hLogs.map((l) => l.completedDate).sort().reverse();
       const { current, longest } = calcStreak(keys);

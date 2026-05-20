@@ -4,12 +4,12 @@ const CATEGORIES = [
   "Health",
   "Fitness",
   "Learning",
+  "Mindfulness",
   "Productivity",
   "Social",
   "Finance",
   "Creative",
   "Other",
-
 ];
 
 const habitSchema = new mongoose.Schema(

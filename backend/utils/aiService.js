@@ -5,7 +5,7 @@ const getClient = () => {
   if (client) return client;
   const key = process.env.GEMINI_API_KEY;
   if (!key) return null;
-  client = new GoogleGenAi({ apiKey: key })
+  client = new GoogleGenAI({ apiKey: key })
   return client;
 };
 
@@ -28,7 +28,7 @@ export const chatCompletion = async ({ system, user, temperature = 0.7 }) => {
   if (!c) {
     return {
       ok: false,
-      content: "AI feature are disabled - set GEMINI_API_KEY in the backend .env to enable real AI responses. Meanw"
+      content: "AI feature are disabled - set GEMINI_API_KEY in the backend .env to enable real AI responses."
     }
   }
   try {
